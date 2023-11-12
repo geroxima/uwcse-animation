@@ -1,34 +1,31 @@
-import uwcse.graphics.*;
-import java.awt.Font;
+import javax.swing.*;
+import uwcse.graphics.GWindow;
 import java.awt.*;
+import java.awt.image.ImageObserver;
+import java.io.IOException;
 
 public class App{
-    public static void main(String[] args){
-        Font newFont = new Font("Cascadia Code PL", Font.BOLD, 20);
-        GWindow window = new GWindow("Hello World", 300, 300);
-        window.setExitOnClose();
-        Oval oval = new Oval(50, 50, 100, 100, java.awt.Color.RED, false);
-        
-        Oval oval2 = new Oval(10, 50, 100, 100, java.awt.Color.CYAN, true);
-        Oval oval3 = new Oval(90, 50, 100, 100, java.awt.Color.BLUE, false);
-        window.add(oval2);
-        window.add(oval); window.add(oval3);
-        TextShape text = new TextShape("Hello, World!", 50, 100, java.awt.Color.BLUE);
-        text.setFont(newFont);
-        window.add(text);
-        // Define the coordinates of the triangle's three vertices
-        int x1 = 400;
-        int y1 = 100;
-        int x2 = 200;
-        int y2 = 100;
-        int x3 = 150;
-        int y3 = 200;
+    public static void main(String[] args) {
+        try {
+            GWindow myWindow = new GWindow("Image Window", 1024, 768);
+            ImageDisplay myImageDisplay = new ImageDisplay("assets/cyberpunk-street.png", 0, 0);
+ 
+            // Stretch the image to fill the window width
+            myImageDisplay.setWidthToWindow(myWindow);
 
-        // Create a new triangle with custom vertices, color, and fill
-        Triangle triangle = new Triangle(x1, y1, x2, y2, x3, y3, java.awt.Color.RED, true);
+            // Align the image to the bottom of the window
+            myImageDisplay.alignToBottom(myWindow);
+            
+            // Add the image to the GWindow
+            myImageDisplay.addTo(myWindow);
+            
 
-        // Add the triangle to the GWindow to display it
-        triangle.addTo(window);
-        
-    }   
+
+            myWindow.setExitOnClose();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
