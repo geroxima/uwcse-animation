@@ -45,19 +45,4 @@ public class SoundPlayer {
             clip.close();
         }
     }
-
-    public static void main(String[] args) {
-        // Example usage
-        String soundFilePath = "assets/sounds/Rubadub.wav"; // Replace with the path to your sound file
-        SoundPlayer soundPlayer = new SoundPlayer(soundFilePath);
-
-        // Play the sound
-        soundPlayer.play();
-
-        // Uncomment the line below to stop the sound after a certain delay (e.g., 2000 milliseconds)
-        // soundPlayer.stop();
-
-        // Be sure to close the sound player when done
-        // soundPlayer.close();
-    }
 }

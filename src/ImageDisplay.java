@@ -1,9 +1,11 @@
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.awt.Color;
 import javax.imageio.ImageIO;
 import uwcse.graphics.GWindow;
 import uwcse.graphics.ImageShape;
+import uwcse.graphics.Rectangle;
 
 public class ImageDisplay {
     private String file;
@@ -79,6 +81,42 @@ public class ImageDisplay {
         // Add the ImageShape to the window
         myWindow.add(imgShape);
     }
+
+     public void drawFilledRectangle(GWindow myWindow, Color color) {
+        // Get the dimensions of the window
+        int windowWidth = myWindow.getWindowWidth();
+        int windowHeight = myWindow.getWindowHeight();
+
+        // Create a filled rectangle with the same size as the window
+        Rectangle rectangle = new Rectangle(0, 0, windowWidth, windowHeight, color, true);
+
+        // Add the rectangle to the window
+        rectangle.addTo(myWindow);
+    }
+
+
+    public void moveTo(int x, int y, int duration) {
+        int currentX = imgShape.getX();
+        int currentY = imgShape.getY();
+        int deltaX = x - currentX;
+        int deltaY = y - currentY;
+        int steps = duration / 10; // Adjust for desired smoothness
+        int stepDelay = duration / steps;
+    
+        for (int i = 1; i <= steps; i++) {
+            int newX = currentX + (deltaX * i / steps);
+            int newY = currentY + (deltaY * i / steps);
+            imgShape.moveTo(newX, newY);
+    
+            // Use Thread.sleep to introduce a delay
+            try {
+                Thread.sleep(stepDelay);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
    
    
     // Method to add the image to a GWindow
