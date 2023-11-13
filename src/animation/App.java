@@ -1,3 +1,5 @@
+package animation;
+import essentials.SoundPlayer;
 import uwcse.graphics.GWindow;
 
 public class App {
@@ -6,13 +8,12 @@ public class App {
         GWindow myWindow = new GWindow("Image Window", 1024, 768);
 
         try {
-            // Call the play method from the Intro class
+            // Reproduce la intro
             Intro.play(myWindow);
             SoundPlayer soundPlayer = new SoundPlayer("assets/sounds/Rubadub.wav");
+            
+            // Reproduce la canción
             soundPlayer.play();
-
-
-
 
 
             myWindow.setExitOnClose();
