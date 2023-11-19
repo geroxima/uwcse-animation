@@ -6,17 +6,24 @@ public class App {
     public static void main(String[] args) {
         // Create a GWindow
         GWindow myWindow = new GWindow("Image Window", 1024, 768);
-
-        try {
-            // Reproduce la intro
-            Intro.play(myWindow);
-            SoundPlayer soundPlayer = new SoundPlayer("assets/sounds/Rubadub.wav");
+        SoundPlayer soundPlayer = new SoundPlayer("assets/sounds/Rubadub.wav");
             
             // Reproduce la canción
-            soundPlayer.play();
+            
 
-
+        try {
             myWindow.setExitOnClose();
+            soundPlayer.play();
+            // Reproduce la intro
+            Intro.play(myWindow);
+            FirstScene.play(myWindow);
+            myWindow.erase();
+            CarInterior.play(myWindow);
+            myWindow.erase();
+            GifImages.play(myWindow);
+
+            
+           
         } catch (Exception e) {
             e.printStackTrace();
         }
