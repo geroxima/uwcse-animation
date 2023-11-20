@@ -19,7 +19,7 @@ public class App {
             FirstScene.play(myWindow);
             myWindow.erase();
             CarInterior.play(myWindow);
-            myWindow.erase();
+            Thread.sleep(4000);
             GifImages.play(myWindow);
 
             

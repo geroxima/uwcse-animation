@@ -10,16 +10,22 @@ public class CarInterior {
     private static uwcse.graphics.Polygon sideWindow2;
     private static uwcse.graphics.Polygon mainPanel;
     private static uwcse.graphics.Polygon sidePanel;
+    private static uwcse.graphics.Polygon steeringWheel;
+
+    private static uwcse.graphics.Polygon keyboard;
 
     private static Rectangle bar1;
     private static Rectangle bar2;
     private static Rectangle bar3;
 
+    private static boolean isAnimatingBars = false;
+
 
     public static void animateBars() throws InterruptedException {
         int animationDuration = 5; // Duración de cada paso de la animación en milisegundos
+        isAnimatingBars = true;
 
-        while (true) {
+        while (isAnimatingBars) {
             // Aumentar el tamaño de las barras
             for (int i = 0; i < 75; i++) {
                 animateBar(bar1, 0, -2, 50, 200 + i);
@@ -38,8 +44,13 @@ public class CarInterior {
         }
     }
 
+    public static void stopAnimatingBars() {
+        isAnimatingBars = false;
+    }
+
     private static void animateBar(Rectangle bar, int deltaX, int deltaY, int newWidth, int newHeight) {
         // Mover y cambiar el tamaño de la barra
+
         bar.moveBy(deltaX, deltaY);
         bar.resize(newWidth, newHeight);
     }
@@ -99,7 +110,7 @@ public class CarInterior {
         bar2 = new Rectangle(125, 450, 50, 100, barColor, true);
         bar3 = new Rectangle(200, 300, 50, 250, barColor, true);
 
-        Polygon steeringWheel = new Polygon();
+        steeringWheel = new uwcse.graphics.Polygon();
         steeringWheel.setColor(new Color(72, 62, 55));
         // Añadir vértices al steeringWheel
         steeringWheel.addPoint(16, 486); //1
@@ -119,10 +130,16 @@ public class CarInterior {
         steeringWheel.addPoint(100, 680); //15
         steeringWheel.addPoint(20, 632); //16
 
+        //Teclado del panel
+        keyboard = new uwcse.graphics.Polygon();
+        keyboard.setColor(new Color(170, 170, 255));
+        keyboard.addPoint(300, 522);
+        keyboard.addPoint(370, 400);
+        keyboard.addPoint(755, 400);
+        keyboard.addPoint(825, 522);
 
-        // TODO un objeto sidePanel (825, 300) (1024, 230) (1024, 610) (825, 488) 
 
-
+        
         // Añadir el fondo a la ventana
         myWindow.add(background);
 
@@ -135,6 +152,9 @@ public class CarInterior {
 
         // Añadir el panel principal a la ventana
         mainPanel.addTo(myWindow);
+
+        // Añadir el teclado a la ventana
+        myWindow.add(keyboard);
 
         // Añadir las barras a la ventana
         bar1.addTo(myWindow);
@@ -155,14 +175,26 @@ public class CarInterior {
 
         // Añadir el sidePanel a la ventana
         sidePanel.addTo(myWindow);
-
-
-        Thread.sleep(3500);
-        myWindow.remove(
-                windshield
-        );
-
-        // animateBars();
+        
+        
+        new Thread(() -> {
+            try {
+                animateBars();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+        
+        new Thread(() -> {
+            try {
+                Thread.sleep(4000);
+                stopAnimatingBars();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            
+        }).start();   
+        
 
 
         

@@ -64,7 +64,7 @@ public class Intro {
 
         int animationDuration = 200; // Duración de la animación entre imágenes en milisegundos
 
-        ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, myWindow, true, true);
+        ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, myWindow, true, true, false);
 
 
 

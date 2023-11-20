@@ -13,14 +13,16 @@ public class ImageAnimator {
     private boolean alignToBottom;
     private boolean setWidthToWindow;
     private boolean isRunning;
+    private boolean setHeightToWindow;
 
-    public ImageAnimator(String[] imagePaths, int animationDuration, GWindow myWindow, boolean alignToBottom, boolean setWidthToWindow) {
+    public ImageAnimator(String[] imagePaths, int animationDuration, GWindow myWindow, boolean alignToBottom, boolean setWidthToWindow, boolean setHeightToWindow) {
         this.imagePaths = imagePaths;
         this.currentIndex = 0;
         this.myWindow = myWindow;
         this.animationDuration = animationDuration;
         this.alignToBottom = alignToBottom;
         this.setWidthToWindow = setWidthToWindow;
+        this.setHeightToWindow = setHeightToWindow;
 
         // Asegurar que myWindow no sea null
         if (myWindow == null) {
@@ -71,6 +73,10 @@ public class ImageAnimator {
         try {
             ImageDisplay nextImageDisplay = new ImageDisplay(imagePaths[currentIndex], 0, 0);
             
+            if (setHeightToWindow){
+                nextImageDisplay.setHeightToWindow(myWindow);
+            }
+
             if (setWidthToWindow) {
                 nextImageDisplay.setWidthToWindow(myWindow);
             }
@@ -92,6 +98,7 @@ public class ImageAnimator {
 
     public void stopAnimation() {
         isRunning = false;
+        myWindow.erase();
         if (currentImageDisplay != null) {
             currentImageDisplay.removeFromWindow();
             currentImageDisplay = null;
@@ -127,7 +134,7 @@ public class ImageAnimator {
              "assets/gif/mainCar/frame_2_delay-0.1s.png",
          };
          int animationDuration = 10; // Duración de la animación entre imágenes en milisegundos
-         ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, new GWindow(500, 500), true, false);
+         ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, new GWindow(500, 500), true, false, false);
      
          // Alinear las imágenes en la parte inferior
         imageAnimator.startAnimation();

@@ -63,6 +63,30 @@ public class ImageDisplay extends ImageShape {
         myWindow.add(this);
     }
 
+    public void setHeightToWindow(GWindow myWindow) {
+        // Get the dimensions of the window
+        int windowHeight = myWindow.getWindowHeight();
+        
+        // Calculate the scaling factor for height
+        double scaleFactorHeight = (double) windowHeight / this.getImage().getHeight(null);
+        
+        // Calculate the new dimensions
+        int newHeight = windowHeight;
+        int newWidth = (int) (this.getImage().getWidth(null) * scaleFactorHeight);
+        
+        int originalX = this.getX();
+        int originalY = this.getY();
+        
+        // Resize the image
+        Image resizedImage = this.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+        
+        // Set the resized image
+        this.setImage(resizedImage);
+        
+        // Move the ImageShape to the original position
+        this.moveTo(originalX, originalY);
+    }
+
     public void moveTo(int x, int y, int duration) {
         int currentX = this.getX();
         int currentY = this.getY();

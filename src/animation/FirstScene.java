@@ -17,7 +17,7 @@ public class FirstScene {
             "assets/gif/mainCar/frame_2_delay-0.1s.png",
         };
         // Inicializar el objeto mainCar
-        ImageAnimator mainCar = new ImageAnimator(mainCarFrames, 15, myWindow, true, false);
+        ImageAnimator mainCar = new ImageAnimator(mainCarFrames, 15, myWindow, true, false, false);
 
         ImageDisplay streets = new ImageDisplay("assets/foreground-tileset.png", 0, 0);
         ImageDisplay background = new ImageDisplay("assets/city/city 8/7.png", 0, 0);
