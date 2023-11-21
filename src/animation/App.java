@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.io.IOException;
 
+import essentials.ImageDisplay;
 import essentials.SoundPlayer;
 import uwcse.graphics.GWindow;
 
@@ -17,6 +18,7 @@ public class App {
         GifImages flashyImages = new GifImages();
         PoliceCar policeCar = new PoliceCar();
         Chase chase = new Chase();
+        ImageDisplay credits = new ImageDisplay("assets/credits.png", 0, 0);
         
         myWindow.setExitOnClose();
         soundPlayer.play();
@@ -27,5 +29,6 @@ public class App {
         flashyImages.play(myWindow);
         policeCar.play(myWindow);
         chase.play(myWindow);
+        credits.addTo(myWindow);
     }
 }

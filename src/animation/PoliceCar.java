@@ -41,10 +41,10 @@ public class PoliceCar {
         ImageDisplay background = new ImageDisplay("assets/city/city 8/7.png", 0, 0);
         ImageDisplay midground = new ImageDisplay("assets/city/city 7/5.png", 0, 100);
 
-        ImageAnimator switchesAnimation = new ImageAnimator(switches, 0, myWindow, true, false, false, false, true, true);
+        ImageAnimator switchesAnimation = new ImageAnimator(switches, 1, myWindow, true, false, false, false, true, true);
 
 
-        ImageAnimator policeTruckAnimation = new ImageAnimator(policeTruck, 0, myWindow, true, false, false, true, false, false);
+        ImageAnimator policeTruckAnimation = new ImageAnimator(policeTruck, 1, myWindow, true, false, false, true, false, false);
 
         background.setWidthToWindow(myWindow);
         background.addTo(myWindow);

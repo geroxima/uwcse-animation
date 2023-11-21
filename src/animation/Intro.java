@@ -39,9 +39,6 @@ public class Intro {
 
         Thread.sleep(4200);
 
-
-
-
         String[] imageNames = {
             "assets/city/city 2/5.png",
             "assets/city/city 2/6.png",
@@ -51,7 +48,6 @@ public class Intro {
             "assets/city/city 5/3.png",
             "assets/city/city 5/4.png",
             "assets/city/city 6/4.png",
-            "assets/city/city 5/5.png",
             "assets/city/city 7/4.png",
             "assets/city/city 7/5.png",
             "assets/city/city 8/4.png",

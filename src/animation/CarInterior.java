@@ -2,6 +2,7 @@ package animation;
 
 import java.awt.Color;
 
+import essentials.ImageAnimator;
 import uwcse.graphics.*;
 
 public class CarInterior {
@@ -56,6 +57,15 @@ public class CarInterior {
     }
 
     public void play(GWindow myWindow) throws InterruptedException {
+
+         String[] panelFrames = {
+            "assets/gif/panel/frame_0_delay-0.1s.png",
+            "assets/gif/panel/frame_1_delay-0.1s.png",
+            "assets/gif/panel/frame_2_delay-0.1s.png",
+        };
+
+        ImageAnimator panelAnimation = new ImageAnimator(panelFrames, 1, myWindow, true, false, false, false, true, true);
+
         Rectangle background = new Rectangle(
                 0, 0,
                 myWindow.getWindowWidth(), myWindow.getWindowHeight(),
@@ -176,7 +186,11 @@ public class CarInterior {
         // Añadir el sidePanel a la ventana
         sidePanel.addTo(myWindow);
         
+        new Thread(() -> {
+            panelAnimation.startAnimation();
+        }).start();
         
+
         new Thread(() -> {
             try {
                 animateBars();
@@ -184,11 +198,14 @@ public class CarInterior {
                 e.printStackTrace();
             }
         }).start();
+
         
         new Thread(() -> {
             try {
                 Thread.sleep(4000);
                 stopAnimatingBars();
+                panelAnimation.stopAnimation();
+                myWindow.erase();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
