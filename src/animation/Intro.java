@@ -2,13 +2,9 @@ package animation;
 import uwcse.graphics.*;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Image;
 import java.io.IOException;
-
-import essentials.Dinosaurio;
 import essentials.ImageAnimator;
 import essentials.ImageDisplay;
-import essentials.MainCar;
 
 
 /**
@@ -18,7 +14,7 @@ import essentials.MainCar;
  */
 
 public class Intro {
-    public static void play(GWindow myWindow) throws IOException, InterruptedException {
+    public void play(GWindow myWindow) throws IOException, InterruptedException {
         // Definir las constantes
         final int MOVE_DURATION = 5000;
 
@@ -64,7 +60,7 @@ public class Intro {
 
         int animationDuration = 200; // Duración de la animación entre imágenes en milisegundos
 
-        ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, myWindow, true, true, false);
+        ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, myWindow, true, false, false, false, true, false);
 
 
 
@@ -78,13 +74,13 @@ public class Intro {
 
         myWindow.remove(midground);
         myWindow.remove(foreground);
-        Thread.sleep(300);
+        Thread.sleep(900);
 
-        myWindow.erase();
+        // myWindow.erase();
 
 }
 
-    public static void playImage(ImageDisplay image, int endX, int endY, int duration) {
+    public void playImage(ImageDisplay image, int endX, int endY, int duration) {
         new Thread(() -> image.moveTo(endX, endY, duration)).start();
     }
 }

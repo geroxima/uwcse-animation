@@ -5,23 +5,23 @@ import java.awt.Color;
 import uwcse.graphics.*;
 
 public class CarInterior {
-    private static uwcse.graphics.Polygon windshield;
-    private static uwcse.graphics.Polygon sideWindow1;
-    private static uwcse.graphics.Polygon sideWindow2;
-    private static uwcse.graphics.Polygon mainPanel;
-    private static uwcse.graphics.Polygon sidePanel;
-    private static uwcse.graphics.Polygon steeringWheel;
+    private  uwcse.graphics.Polygon windshield;
+    private  uwcse.graphics.Polygon sideWindow1;
+    private  uwcse.graphics.Polygon sideWindow2;
+    private  uwcse.graphics.Polygon mainPanel;
+    private  uwcse.graphics.Polygon sidePanel;
+    private  uwcse.graphics.Polygon steeringWheel;
 
-    private static uwcse.graphics.Polygon keyboard;
+    private  uwcse.graphics.Polygon keyboard;
 
-    private static Rectangle bar1;
-    private static Rectangle bar2;
-    private static Rectangle bar3;
+    private  Rectangle bar1;
+    private  Rectangle bar2;
+    private  Rectangle bar3;
 
-    private static boolean isAnimatingBars = false;
+    private  boolean isAnimatingBars = false;
 
 
-    public static void animateBars() throws InterruptedException {
+    public void animateBars() throws InterruptedException {
         int animationDuration = 5; // Duración de cada paso de la animación en milisegundos
         isAnimatingBars = true;
 
@@ -44,18 +44,18 @@ public class CarInterior {
         }
     }
 
-    public static void stopAnimatingBars() {
+    public void stopAnimatingBars() {
         isAnimatingBars = false;
     }
 
-    private static void animateBar(Rectangle bar, int deltaX, int deltaY, int newWidth, int newHeight) {
+    private void animateBar(Rectangle bar, int deltaX, int deltaY, int newWidth, int newHeight) {
         // Mover y cambiar el tamaño de la barra
 
         bar.moveBy(deltaX, deltaY);
         bar.resize(newWidth, newHeight);
     }
 
-    public static void play(GWindow myWindow) throws InterruptedException {
+    public void play(GWindow myWindow) throws InterruptedException {
         Rectangle background = new Rectangle(
                 0, 0,
                 myWindow.getWindowWidth(), myWindow.getWindowHeight(),
@@ -192,22 +192,7 @@ public class CarInterior {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            
         }).start();   
-        
 
-
-        
-    }
-
-    public static void main(String[] args) {
-        GWindow myWindow = new GWindow("Image Window", 1024, 768);
-        try {
-
-            CarInterior.play(myWindow);
-            myWindow.setExitOnClose();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }

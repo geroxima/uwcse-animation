@@ -11,11 +11,14 @@ public class ImageAnimator {
     private int animationDuration;
     private GWindow myWindow;
     private boolean alignToBottom;
+    private boolean alignToRigth;
+    private boolean alignToLeft;
+    private boolean alignToCenter;
     private boolean setWidthToWindow;
     private boolean isRunning;
     private boolean setHeightToWindow;
 
-    public ImageAnimator(String[] imagePaths, int animationDuration, GWindow myWindow, boolean alignToBottom, boolean setWidthToWindow, boolean setHeightToWindow) {
+    public ImageAnimator(String[] imagePaths, int animationDuration, GWindow myWindow, boolean alignToBottom, boolean alignToLeft, boolean alignToRight, boolean alignToCenter, boolean setWidthToWindow, boolean setHeightToWindow) {
         this.imagePaths = imagePaths;
         this.currentIndex = 0;
         this.myWindow = myWindow;
@@ -23,6 +26,9 @@ public class ImageAnimator {
         this.alignToBottom = alignToBottom;
         this.setWidthToWindow = setWidthToWindow;
         this.setHeightToWindow = setHeightToWindow;
+        this.alignToLeft = alignToLeft;
+        this.alignToRigth = alignToRight;
+        this.alignToCenter = alignToCenter;
 
         // Asegurar que myWindow no sea null
         if (myWindow == null) {
@@ -77,10 +83,21 @@ public class ImageAnimator {
                 nextImageDisplay.setHeightToWindow(myWindow);
             }
 
+            if (alignToCenter) {
+                nextImageDisplay.alignToCenter(myWindow);
+            }
+            
             if (setWidthToWindow) {
                 nextImageDisplay.setWidthToWindow(myWindow);
             }
 
+            if (alignToLeft) {
+                nextImageDisplay.alignToLeft(myWindow);
+            }
+
+            if (alignToRigth) {
+                nextImageDisplay.alignToRight(myWindow);
+            }
 
             if (alignToBottom) {
                 nextImageDisplay.alignToBottom(myWindow);
@@ -126,23 +143,7 @@ public class ImageAnimator {
         }
     }
 
-     public static void main(String[] args) throws InterruptedException {
-         // Ejemplo de uso para el slideshow
-         String[] imageNames = {
-             "assets/gif/mainCar/frame_0_delay-0.1s.png",
-             "assets/gif/mainCar/frame_1_delay-0.1s.png",
-             "assets/gif/mainCar/frame_2_delay-0.1s.png",
-         };
-         int animationDuration = 10; // Duración de la animación entre imágenes en milisegundos
-         ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, new GWindow(500, 500), true, false, false);
-     
-         // Alinear las imágenes en la parte inferior
-        imageAnimator.startAnimation();
-        Thread.sleep(5000);
-        imageAnimator.stopAnimation();
-        
-     
+
          // O bien, sin alineación en la parte inferior
          // imageAnimator.startSlideshow(false);
-     }
 }

@@ -1,12 +1,11 @@
 package essentials;
-import java.awt.Image;
+
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.awt.Color;
 import javax.imageio.ImageIO;
 import uwcse.graphics.GWindow;
 import uwcse.graphics.ImageShape;
-import uwcse.graphics.Rectangle;
 
 public class ImageDisplay extends ImageShape {
     private String file;
@@ -15,7 +14,7 @@ public class ImageDisplay extends ImageShape {
     public ImageDisplay(String filePath, int x, int y) throws IOException {
         super(ImageIO.read(new File(filePath)), x, y);
         this.file = filePath;
-        this.img = ImageIO.read(new File(filePath)); 
+        this.img = ImageIO.read(new File(filePath));
     }
 
     // Getters for file and img
@@ -30,35 +29,43 @@ public class ImageDisplay extends ImageShape {
     public void alignToBottom(GWindow myWindow) {
         // Get the dimensions of the window
         int windowHeight = myWindow.getWindowHeight();
-    
+
         // Calculate the new position to align the image to the bottom
         int newX = this.getX();
         int newY = windowHeight - this.getHeight();
-    
+
         // Move the ImageShape to the new position
+        this.moveTo(newX, newY);
+    }
+
+    public void alignToCenter(GWindow myWindow) {
+        int windowWidth = myWindow.getWindowWidth();
+        int windowHeight = myWindow.getWindowHeight();
+        int newX = (windowWidth - this.getWidth()) / 2;
+        int newY = (windowHeight - this.getHeight()) / 2;
         this.moveTo(newX, newY);
     }
 
     public void setWidthToWindow(GWindow myWindow) {
         // Get the dimensions of the window
         int windowWidth = myWindow.getWindowWidth();
-    
+
         // Calculate the scaling factor for width
         double scaleFactorWidth = (double) windowWidth / this.getImage().getWidth(null);
-    
+
         // Calculate the new dimensions
         int newWidth = windowWidth;
         int newHeight = (int) (this.getImage().getHeight(null) * scaleFactorWidth);
-    
+
         int originalX = this.getX();
         int originalY = this.getY();
-    
+
         // Resize the image
         Image resizedImage = this.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-    
+
         // Create a new ImageShape with the resized image and original position
         this.setImage(resizedImage);
-    
+
         // Add the ImageShape to the window
         myWindow.add(this);
     }
@@ -66,23 +73,23 @@ public class ImageDisplay extends ImageShape {
     public void setHeightToWindow(GWindow myWindow) {
         // Get the dimensions of the window
         int windowHeight = myWindow.getWindowHeight();
-        
+
         // Calculate the scaling factor for height
         double scaleFactorHeight = (double) windowHeight / this.getImage().getHeight(null);
-        
+
         // Calculate the new dimensions
         int newHeight = windowHeight;
         int newWidth = (int) (this.getImage().getWidth(null) * scaleFactorHeight);
-        
+
         int originalX = this.getX();
         int originalY = this.getY();
-        
+
         // Resize the image
         Image resizedImage = this.getImage().getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-        
+
         // Set the resized image
         this.setImage(resizedImage);
-        
+
         // Move the ImageShape to the original position
         this.moveTo(originalX, originalY);
     }
@@ -94,12 +101,12 @@ public class ImageDisplay extends ImageShape {
         int deltaY = y - currentY;
         int steps = duration / 10; // Adjust for desired smoothness
         int stepDelay = duration / steps;
-    
+
         for (int i = 1; i <= steps; i++) {
             int newX = currentX + (deltaX * i / steps);
             int newY = currentY + (deltaY * i / steps);
             this.moveTo(newX, newY);
-    
+
             // Use Thread.sleep to introduce a delay
             try {
                 Thread.sleep(stepDelay);
@@ -107,5 +114,26 @@ public class ImageDisplay extends ImageShape {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void alignToRight(GWindow myWindow) {
+        // Get the dimensions of the window
+        int windowWidth = myWindow.getWindowWidth();
+
+        // Calculate the new position to align the image to the right
+        int newX = windowWidth - this.getWidth();
+        int newY = this.getY();
+
+        // Move the ImageShape to the new position
+        this.moveTo(newX, newY);
+    }
+
+    public void alignToLeft(GWindow myWindow) {
+        // Calculate the new position to align the image to the left
+        int newX = 0;
+        int newY = this.getY();
+
+        // Move the ImageShape to the new position
+        this.moveTo(newX, newY);
     }
 }
