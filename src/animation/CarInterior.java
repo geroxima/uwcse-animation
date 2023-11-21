@@ -5,6 +5,10 @@ import java.awt.Color;
 import essentials.ImageAnimator;
 import uwcse.graphics.*;
 
+/**
+ * Esta clase contiene el elemento complejo del interior del vehículo.
+ */
+
 public class CarInterior {
     private  uwcse.graphics.Polygon windshield;
     private  uwcse.graphics.Polygon sideWindow1;
@@ -12,17 +16,15 @@ public class CarInterior {
     private  uwcse.graphics.Polygon mainPanel;
     private  uwcse.graphics.Polygon sidePanel;
     private  uwcse.graphics.Polygon steeringWheel;
-
     private  uwcse.graphics.Polygon keyboard;
-
     private  Rectangle bar1;
     private  Rectangle bar2;
     private  Rectangle bar3;
 
     private  boolean isAnimatingBars = false;
 
-
-    public void animateBars() throws InterruptedException {
+    // Este método reproduce la animación de las barras de información.
+    private void animateBars() throws InterruptedException {
         int animationDuration = 5; // Duración de cada paso de la animación en milisegundos
         isAnimatingBars = true;
 
@@ -45,19 +47,24 @@ public class CarInterior {
         }
     }
 
-    public void stopAnimatingBars() {
+    // Este método detiene la animación de las barras de información.
+    private void stopAnimatingBars() {
         isAnimatingBars = false;
     }
 
+    // Este método anima una barra de información.
     private void animateBar(Rectangle bar, int deltaX, int deltaY, int newWidth, int newHeight) {
         // Mover y cambiar el tamaño de la barra
-
         bar.moveBy(deltaX, deltaY);
         bar.resize(newWidth, newHeight);
     }
 
+    /*
+     * Este método reproduce la animación del interior del vehículo.
+     * @param myWindow Ventana en la que se reproduce la animación.
+     */
     public void play(GWindow myWindow) throws InterruptedException {
-
+        // Crear el objeto panelAnimation (animación del panel)
          String[] panelFrames = {
             "assets/gif/panel/frame_0_delay-0.1s.png",
             "assets/gif/panel/frame_1_delay-0.1s.png",
@@ -66,6 +73,7 @@ public class CarInterior {
 
         ImageAnimator panelAnimation = new ImageAnimator(panelFrames, 1, myWindow, true, false, false, false, true, true);
 
+        // Crear el objeto background (fondo)
         Rectangle background = new Rectangle(
                 0, 0,
                 myWindow.getWindowWidth(), myWindow.getWindowHeight(),
@@ -185,12 +193,14 @@ public class CarInterior {
 
         // Añadir el sidePanel a la ventana
         sidePanel.addTo(myWindow);
-        
+
+
+        // Inicializa la animación del panel  
         new Thread(() -> {
             panelAnimation.startAnimation();
         }).start();
         
-
+        // Inicializa la animación de las barras
         new Thread(() -> {
             try {
                 animateBars();
@@ -199,7 +209,7 @@ public class CarInterior {
             }
         }).start();
 
-        
+        // Esperar 4 segundos y detener la animación        
         new Thread(() -> {
             try {
                 Thread.sleep(4000);
