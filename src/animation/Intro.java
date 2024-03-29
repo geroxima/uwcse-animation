@@ -1,4 +1,5 @@
 package animation;
+
 import uwcse.graphics.*;
 import java.awt.Color;
 import java.awt.Font;
@@ -6,14 +7,18 @@ import java.io.IOException;
 import essentials.ImageAnimator;
 import essentials.ImageDisplay;
 
-
 /**
- * Esta clase representa la introducción de la anmación.
- * @param myWindow es la ventana donde se mostrará la animación.
- * @throws IOException es la excepción que se lanza si no se encuentra la imagen.
+ * Esta clase representa la introducción de la animación.
  */
-
 public class Intro {
+
+    /**
+     * Reproduce las animaciones definidas en esta clase.
+     * 
+     * @param myWindow La ventana en la que se mostrará la animación.
+     * @throws IOException Si ocurre un error al cargar la imagen.
+     * @throws InterruptedException Si se interrumpe la ejecución del hilo durante la animación.
+     */
     public void play(GWindow myWindow) throws IOException, InterruptedException {
         // Definir las constantes
         final int MOVE_DURATION = 5000;
@@ -52,7 +57,7 @@ public class Intro {
             "assets/city/city 8/5.png",
         };
         // Duración de la animación entre imágenes en milisegundos
-        int animationDuration = 200; 
+        int animationDuration = 200;
 
         ImageAnimator imageAnimator = new ImageAnimator(imageNames, animationDuration, myWindow, true, false, false, false, true, false);
 
@@ -61,17 +66,21 @@ public class Intro {
 
         midground.moveTo(0, 500, 300);
         foreground.moveTo(0, 500, 300);
-        
 
         myWindow.remove(midground);
         myWindow.remove(foreground);
         Thread.sleep(900);
 
         myWindow.erase();
+    }
 
-}
-    /*
+    /**
      * Mueve una imagen a una posición en la ventana en un tiempo determinado.
+     * 
+     * @param image La imagen que se moverá.
+     * @param endX La coordenada x final.
+     * @param endY La coordenada y final.
+     * @param duration La duración de la animación en milisegundos.
      */
     public void playImage(ImageDisplay image, int endX, int endY, int duration) {
         new Thread(() -> image.moveTo(endX, endY, duration)).start();

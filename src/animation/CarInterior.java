@@ -1,6 +1,7 @@
 package animation;
 
 import java.awt.Color;
+import java.io.IOException;
 
 import essentials.ImageAnimator;
 import uwcse.graphics.*;
@@ -23,7 +24,8 @@ public class CarInterior {
 
     private  boolean isAnimatingBars = false;
 
-    // Este método reproduce la animación de las barras de información.
+    //  Reproduce la animación de las barras de información.
+    //  @throws InterruptedException Si se interrumpe la ejecución del hilo durante la animación.
     private void animateBars() throws InterruptedException {
         int animationDuration = 5; // Duración de cada paso de la animación en milisegundos
         isAnimatingBars = true;
@@ -59,11 +61,14 @@ public class CarInterior {
         bar.resize(newWidth, newHeight);
     }
 
-    /*
-     * Este método reproduce la animación del interior del vehículo.
-     * @param myWindow Ventana en la que se reproduce la animación.
+    /**
+     * Reproduce la animación del interior del vehículo.
+     * 
+     * @param myWindow La ventana en la que se reproduce la animación.
+     * @throws InterruptedException Si se interrumpe la ejecución del hilo durante la animación.
+     * @throws IOException
      */
-    public void play(GWindow myWindow) throws InterruptedException {
+    public void play(GWindow myWindow) throws InterruptedException, IOException {
         // Crear el objeto panelAnimation (animación del panel)
          String[] panelFrames = {
             "assets/gif/panel/frame_0_delay-0.1s.png",

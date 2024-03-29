@@ -1,54 +1,68 @@
 package essentials;
+
+import java.io.File;
+import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
-import java.io.IOException;
 
+/**
+ * Clase que proporciona funcionalidades para reproducir sonidos.
+ */
 public class SoundPlayer {
+
     private Clip clip;
 
+    /**
+     * Constructor que crea un objeto SoundPlayer para el archivo de sonido especificado.
+     *
+     * @param soundFilePath Ruta del archivo de sonido.
+     */
     public SoundPlayer(String soundFilePath) {
         try {
-            // Load the sound file
+            // Cargar el archivo de sonido
             File soundFile = new File(soundFilePath);
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
 
-            // Get a Clip to play the sound
+            // Obtener un Clip para reproducir el sonido
             clip = AudioSystem.getClip();
 
-            // Open the audio clip with the provided audio input stream
+            // Abrir el clip de audio con el flujo de entrada de audio proporcionado
             clip.open(audioInputStream);
         } catch (UnsupportedAudioFileException | LineUnavailableException | IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Reproduce el sonido.
+     */
     public void play() {
         if (clip != null) {
-            // Start playing the sound
+            // Inicia la reproducción del sonido
             clip.start();
         }
     }
 
+    /**
+     * Detiene la reproducción del sonido.
+     */
     public void stop() {
         if (clip != null) {
-            // Stop playing the sound
+            // Detiene la reproducción del sonido
             clip.stop();
         }
     }
 
+    /**
+     * Cierra el clip para liberar los recursos asociados.
+     */
     public void close() {
         if (clip != null) {
-            // Close the clip to release resources
+            // Cierra el clip para liberar recursos
             clip.close();
         }
-    }
-    public static void main(String[] args) {
-        // Ejemplo de uso
-        SoundPlayer soundPlayer = new SoundPlayer("assets/sounds/Rubadub.wav");
-        soundPlayer.play();
     }
 }

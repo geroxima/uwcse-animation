@@ -1,14 +1,21 @@
 package animation;
+import java.io.IOException;
+
 import essentials.*;
 import uwcse.graphics.*;
-/*
- * Esta clase muestra en pantalla una secuencia de objetos ImageAnimator. Los cuales muestran de forma secuencial una imagen tras otra.
+/**
+ * Esta clase muestra en pantalla una secuencia de objetos ImageAnimator. 
+ * Los cuales muestran de forma secuencial una imagen tras otra.
  */
 public class GifImages {
-    /*
+   /**
      * Muestra en pantalla una secuencia de objetos ImageAnimator y los reproduce.
+     * 
+     * @param myWindow La ventana en la que se mostrará la animación.
+     * @throws InterruptedException Si se interrumpe la ejecución del hilo durante la animación.
+ * @throws IOException
      */
-    public  void play (GWindow myWindow) throws InterruptedException{
+    public  void play (GWindow myWindow) throws InterruptedException, IOException{
         String[] handsGif = {
             "assets/gif/hands/frame_00_delay-0.04s.png",
             "assets/gif/hands/frame_01_delay-0.04s.png",
@@ -71,8 +78,7 @@ public class GifImages {
             "assets/gif/arm/frame_14_delay-0.03s.png",
             "assets/gif/arm/frame_15_delay-0.03s.png",
             "assets/gif/arm/frame_16_delay-0.03s.png",
-            "assets/gif/arm/frame_17_delay-0.03s.png",
-            
+            "assets/gif/arm/frame_17_delay-0.03s.png",    
         };
 
         String[] hackGIf = {
